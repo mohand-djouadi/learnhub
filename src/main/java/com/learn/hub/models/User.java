@@ -1,13 +1,17 @@
 package com.learn.hub.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.learn.hub.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -22,6 +26,9 @@ public class User implements UserDetails {
     private String firstname;
     private String lastname;
     private String email;
+    @Enumerated(EnumType.STRING)
+    @JsonIgnore
+    private Role role = Role.STUDENT;
     @JsonIgnore
     private String password;
 
@@ -44,7 +51,13 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        role.getPermissions().forEach(permissions ->
+            authorities.add(new SimpleGrantedAuthority(permissions.name()))
+        );
+        authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+        System.out.println("authorities"+authorities);
+        return authorities;
     }
 
     @Override
