@@ -13,7 +13,7 @@ public class LoginRequest {
     @Email(message = "invalid email")
     private String email;
 
-    @NotBlank(message = "passsword id missing")
+    @NotBlank(message = "passsword is missing")
     @Size(min = 8, message = "password must have at least 8 caracters")
     private String password;
 }
