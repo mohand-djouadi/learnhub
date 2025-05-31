@@ -1,11 +1,20 @@
 package com.learn.hub.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Table(name = "Formation")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Formation {
 
     @Id
@@ -14,7 +23,6 @@ public class Formation {
     private String title;
     private String description;
     private Boolean premium;
-    private Double price;
 
     @OneToMany(mappedBy = "formation")
     public List<Cour> cours;

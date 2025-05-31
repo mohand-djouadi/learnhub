@@ -14,7 +14,6 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    private String type;
 
     @ManyToOne
     @JoinColumn(name = "quiz_id")

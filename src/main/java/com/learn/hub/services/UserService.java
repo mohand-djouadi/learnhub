@@ -50,6 +50,7 @@ public class UserService implements UserDetailsService {
         User newUser = User.builder()
             .firstname(request.getFirstname())
             .lastname(request.getLastname())
+            .role(request.getRole())
             .email(request.getEmail())
             .build();
         newUser.setPassword(passwordEncoder.encode(request.getPassword()));
