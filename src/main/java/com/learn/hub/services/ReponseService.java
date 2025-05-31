@@ -1,6 +1,7 @@
 package com.learn.hub.services;
 
 import com.learn.hub.DTOs.ReponseReqDTO;
+import com.learn.hub.DTOs.ReponseResDTO;
 import com.learn.hub.models.Question;
 import com.learn.hub.models.Reponse;
 import com.learn.hub.repositories.QuestionRepository;
@@ -20,14 +21,20 @@ public class ReponseService {
         return this.reponseRepository.findByQuestionId(questId);
     }
 
-    public Reponse createReponse(ReponseReqDTO request) {
-        return this.reponseRepository.save(
+    public ReponseResDTO createReponse(ReponseReqDTO request) {
+        Reponse rep = this.reponseRepository.save(
             Reponse.builder()
                 .content(request.getContent())
                 .istrue(request.getIsTrue())
                 .question(this.questionRepository.findById(request.getQuestionId()).get())
                 .build()
         );
+        return ReponseResDTO.builder()
+            .questId(rep.getQuestion().getId())
+            .content(rep.getContent())
+            .isTrue(rep.getIstrue())
+            .id(rep.getId())
+            .build();
     }
 
     public Boolean deleteReponse(Long id) {

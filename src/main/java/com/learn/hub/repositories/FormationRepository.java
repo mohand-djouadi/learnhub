@@ -18,5 +18,6 @@ public interface FormationRepository extends JpaRepository<Formation, Long> {
     Formation findByCoursId(Long courId);
     List<Formation> findByQuizId(Long quizId);
     List<Formation> findByInscriptionsUserId(Long studentId);
+    List<Formation> findByPremium(Boolean premium);
 
 }

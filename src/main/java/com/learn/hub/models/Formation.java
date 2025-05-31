@@ -23,6 +23,7 @@ public class Formation {
     private String title;
     private String description;
     private Boolean premium;
+    private String code;
 
     @OneToMany(mappedBy = "formation")
     public List<Cour> cours;

@@ -15,5 +15,6 @@ public class FormationReqDTO {
     private String description;
     @NotNull
     private Boolean premium;
+    private String code;
 
 }
